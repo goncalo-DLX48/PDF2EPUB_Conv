@@ -80,9 +80,23 @@ class App:
         ttk.Button(bl, text="Limpar", command=self.limpar).pack(side=tk.LEFT)
         ttk.Label(bl, text="  (também pode arrastar PDFs para a janela, se suportado)").pack(side=tk.LEFT, padx=(8, 0))
 
+        # Botão "Detalhes" (metadados e divisão ocultos por defeito)
+        self.det_aberto = False
+        det_bar = ttk.Frame(frm)
+        det_bar.grid(row=3, column=0, sticky="w", pady=(0, 6))
+        self.btn_detalhes = ttk.Button(det_bar, text="Detalhes \u25b8",
+                                       command=self.alternar_detalhes)
+        self.btn_detalhes.pack(side=tk.LEFT)
+        ttk.Label(det_bar, text="  Metadados e divisão do EPUB").pack(
+            side=tk.LEFT, padx=(8, 0))
+
+        self.det = ttk.Frame(frm)
+        self.det.grid(row=4, column=0, sticky="ew")
+        self.det.columnconfigure(0, weight=1)
+
         # Metadados
-        meta = ttk.LabelFrame(frm, text="Metadados (em branco = usar os do PDF)", padding=8)
-        meta.grid(row=3, column=0, sticky="ew", pady=(0, 6))
+        meta = ttk.LabelFrame(self.det, text="Metadados (em branco = usar os do PDF)", padding=8)
+        meta.grid(row=0, column=0, sticky="ew", pady=(0, 6))
         meta.columnconfigure(1, weight=1)
         ttk.Label(meta, text="Título:").grid(row=0, column=0, sticky="w", padx=(0, 6))
         self.ent_titulo = ttk.Entry(meta)
@@ -96,8 +110,8 @@ class App:
         self.cmb_lingua.grid(row=2, column=1, sticky="w", pady=(4, 0))
 
         # Opções de divisão
-        div = ttk.LabelFrame(frm, text="Divisão (documentos sem títulos)", padding=8)
-        div.grid(row=4, column=0, sticky="ew", pady=(0, 6))
+        div = ttk.LabelFrame(self.det, text="Divisão (documentos sem títulos)", padding=8)
+        div.grid(row=1, column=0, sticky="ew", pady=(0, 6))
         self.var_nao_dividir = tk.BooleanVar(value=False)
         ttk.Checkbutton(div, text="Não dividir documentos sem títulos",
                         variable=self.var_nao_dividir).pack(anchor="w")
@@ -153,6 +167,17 @@ class App:
             self.root.bind("<<Drop>>", self._on_drop)
         except Exception:
             pass  # sem tkinterdnd2: só diálogo de ficheiros
+
+        self.det.grid_remove()
+
+    def alternar_detalhes(self):
+        if self.det_aberto:
+            self.det.grid_remove()
+            self.btn_detalhes.configure(text="Detalhes \u25b8")
+        else:
+            self.det.grid()
+            self.btn_detalhes.configure(text="Detalhes \u25be")
+        self.det_aberto = not self.det_aberto
 
     # ---------- lista ----------
     def adicionar(self):

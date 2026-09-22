@@ -32,7 +32,7 @@ missing module named multiprocessing.get_context - imported by multiprocessing (
 missing module named multiprocessing.TimeoutError - imported by multiprocessing (top-level), multiprocessing.pool (top-level)
 missing module named multiprocessing.set_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
 missing module named multiprocessing.get_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
-missing module named tkinterdnd2 - imported by C:\Users\ggf96\Desktop\PDF2EPUB_Conv\pdf2epub\pdf2epub_gui.py (delayed, optional)
+missing module named tkinterdnd2 - imported by C:\Users\ggf96\Desktop\pdf2epub\PDF2EPUB_Conv\pdf2epub_gui.py (delayed, optional)
 missing module named pandas - imported by pymupdf.table (delayed, optional)
 missing module named vms_lib - imported by platform (delayed, optional)
 missing module named 'java.lang' - imported by platform (delayed, optional)
